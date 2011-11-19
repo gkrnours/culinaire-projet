@@ -5,8 +5,11 @@ import java.awt.Panel;
 import java.io.FileNotFoundException;
 
 import javax.swing.ImageIcon;
+import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JSpinner;
+import javax.swing.SpinnerNumberModel;
 
 
 
@@ -114,7 +117,7 @@ public class Outils{
 	/**
 	 * Demande d'un nombre entier à l'utilisateur, avec une icône non-standard.
 	 * @param title Titre de la fenêtre posant la question
-	 * @param question Question à poser à l'utilisateur. Peut être un String, ou une objet plus complexe. 
+	 * @param question Question à poser à l'utilisateur.
 	 * @param image chemin de l'image à afficher à coté de la question
 	 * @return Retourne un entier valide, pouvant être nul ou négatif
 	 * @see JOptionPane#message
@@ -122,13 +125,43 @@ public class Outils{
 	public static int readInt(String title , Object question, String image) {
 		int result ;
 		Object request;
-		ImageIcon icon = getIcon(image);
 		request = JOptionPane.showInputDialog(null, question, title,
-								JOptionPane.QUESTION_MESSAGE, icon, null, null);
+					JOptionPane.QUESTION_MESSAGE, getIcon(image), null, null);
 		try{
 			result = Integer.parseInt(request.toString());
 		}catch (java.lang.NumberFormatException e){
 			return readInt(title, question+"\n entrez un entier", image);
+		}
+		return result;
+	}
+	
+	/**
+	 * Demande un nombre réel à l'utilisateur
+	 * @param title Titre de la fenêtre posant la question
+	 * @param question Question à poser à l'utilisateur.
+	 * @return Retourne un double valide, potentiellement nul ou négatif
+	 * @see JOptionPane#message
+	 */
+	public static Double readDouble(String title, Object question){
+		return readDouble(title, question, "");
+	}
+	/**
+	 * Demande un nombre réel à l'utilisateur
+	 * @param title Titre de la fenêtre posant la question
+	 * @param question Question à poser à l'utilisateur.
+	 * @param img Chemin vers une image. Sera affiché à coté de question
+	 * @return Retourne un double valide, potentiellement nul ou négatif
+	 * @see JOptionPane#message
+	 */
+	public static Double readDouble(String title, Object question, String img){
+		double result;
+		Object request;
+		request = JOptionPane.showInputDialog(null,  question, title,
+					JOptionPane.QUESTION_MESSAGE, getIcon(img), null, null);
+		try{
+			result = Double.parseDouble(request.toString());
+		}catch(java.lang.NumberFormatException e){
+			return readDouble(title, question+"\n entrez un entier", img);
 		}
 		return result;
 	}
