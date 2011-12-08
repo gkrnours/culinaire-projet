@@ -13,8 +13,11 @@ class LoadFailedException extends Exception{
 	private static final long serialVersionUID = 2198494962452362547L;}
 
 public class Menu {
-	private String app_title = new String("Culinaire");
 	private Set<Recettes> recettes = new HashSet<Recettes>();
+	String app_title = new String("Culinaire");
+	String[] gout = new String[]{"Salé","Sucré","Basique"};
+	String[] cuisson = new String[]{"Froid", "Four", 
+									"Plaque chauffante", "Micro-ondes"};
 	
 	public static void main(String[] args){
 		new Menu();
@@ -52,8 +55,7 @@ public class Menu {
 				Ingredients i = Ingredients.get(n);
 				if(i == null){ // si l'ingrédient est inconnu, création
 					int g =	Outils.readOption(app_title+t,
-							"Gout de l'ingredient",
-							new String[]{"Salé","Sucré","Basique"});
+							"Gout de l'ingredient", gout);
 					switch(g){
 					case 0:	i = new Sale(n);	break;
 					case 1:	i = new Sucre(n);	break;
@@ -63,8 +65,7 @@ public class Menu {
 				ingredient.put(i, q);
 			}while(Outils.readBoolean(app_title+t, "Plus d'ingredient ?"));
 			int c = Outils.readOption(app_title+t, "Mode de cuisson ?",
-									new String[]{"Froid", "Four", 
-									"Plaque chauffante", "Micro-ondes"});
+										cuisson);
 			Recettes r = null;
 			switch(c){
 			case 0:	r = new Froid(nom, temps, ingredient);		break;
