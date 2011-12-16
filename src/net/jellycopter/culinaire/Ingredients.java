@@ -17,8 +17,8 @@ static public Ingredients[] getAll(){
 	return hs.values().toArray(new Ingredients[hs.size()]);
 }
 
-public static String[] emballer(Ingredients i){
-	return new String[]{ i.getNom(), i.getClass().toString() };
+public String[] emballer(){
+	return new String[]{ getNom(), getClass().toString().split("[.]")[3]};
 }
 public static Ingredients deballer(String[] s){
 	Ingredients i;
@@ -49,4 +49,8 @@ return nom;
 
 abstract void gout();
 
+public String toString(){ 
+	return this.getClass().toString().split("[.]")[3]+": "+nom; 
+}
+		
 }

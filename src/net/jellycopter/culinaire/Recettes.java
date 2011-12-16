@@ -2,6 +2,7 @@ package net.jellycopter.culinaire;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 
 
 public abstract class Recettes {
@@ -26,7 +27,6 @@ public abstract class Recettes {
 		e[2] = i.toString();
 		e[3] = getClass().toString().split("[.]")[3];
 		// la classe est le 4ème champ lors du split
-		System.out.println(e[3]);
 		return e;
 	}
 	public static Recettes deballer(String[] e){
@@ -68,12 +68,21 @@ public abstract class Recettes {
 	public int getTemps() {
 		return temps;
 	}
-
+//TODO 	memory: primary key
+//TODO	recette: type de recette
 	public Map<Ingredients, Integer> getIngredients() {
 		return ingredients;
 	}
 
-
+	public String toString(){
+		String r =  this.getClass().toString().split("[.]")[3]
+				+": "+temps+" minutes\n"
+				+"Ingredients :";
+		for(Entry<Ingredients, Integer> e: ingredients.entrySet()){
+			r += "\n"+e.getKey()+": "+e.getValue();
+		}
+		return r;
+	}
 
 
 	

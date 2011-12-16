@@ -3,6 +3,7 @@ package net.jellycopter.culinaire;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 
 import net.jellycopter.lib.Memory;
@@ -25,22 +26,35 @@ public class Menu {
 	
 	public Menu(){
 		load();
-		Outils.affiche(app_title, "Recettes");
-		for(Recettes r: Recettes.getAll()){
-			Outils.affiche(app_title, new String[]{
-					r.getNom(), r.getTemps()+""	});
-		}
-		livreRecette();
-		Outils.affiche(app_title, "Recettes");
-		for(Recettes r: Recettes.getAll()){
-			Outils.affiche(app_title, new String[]{
-					r.getNom(), r.getTemps()+""	});
-		}
+		boolean act = true;
+		String[] options = new String[]{
+				"Ajouter une recette",
+				"Afficher les recettes",
+				"Arreter"};
+		do{
+			switch(Outils.readOption(app_title, "Que faire ?", options)){
+			case 0:		livreRecette();		break;
+			case 1:		afficheRecettes();		break;
+			default: act = false;
+			}
+		}while(act);
 		save();
 	}
 	
 	private void frigo(){
 		
+	}
+	private void afficheRecettes(){
+		for(Recettes r: Recettes.getAll()){
+//			String[] aff = new String[r.getIngredients().size()+1];
+//			aff[0] = r.getNom()+" - "+r.getTemps();
+//			int i = 0; 
+//			for(Entry<Ingredients, Integer> e: r.getIngredients().entrySet() ){
+//				aff[++i] = e.getKey()+" "+e.getValue();
+//			}
+//			Outils.affiche(app_title, aff);
+			Outils.affiche(app_title, r);
+		}
 	}
 	private void livreRecette(){
 		String t = " - Ajout d'une recette";
@@ -109,7 +123,7 @@ public class Menu {
 			}
 		}
 		for(Ingredients i: Ingredients.getAll()){
-			try{ Memory.write("ingredient", Ingredients.emballer(i)); }
+			try{ Memory.write("ingredient", i.emballer()); }
 			catch(Exception e){
 				System.err.println("Erreur lors de l'écriture de "+i);
 			}
