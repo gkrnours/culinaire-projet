@@ -82,14 +82,17 @@ public class Memory {
 			StringBuilder request = new StringBuilder();
 			request.append("CREATE TABLE ").append(what);
 			request.append(" (");
-			boolean first = false;
+			boolean first = true;
 			for(String col: how){
 				request.append(col);
-				if(first) request.append(" PRIMARY KEY");
-				first = false;
+				if(first) {
+					request.append(" PRIMARY KEY");
+					first = false;
+				}
 				request.append(",");
 			}
 			request.deleteCharAt(request.length()-1).append(")");
+			
 			SQLiteStatement st = db.prepare(request.toString());
 			try{
 				st.stepThrough();
