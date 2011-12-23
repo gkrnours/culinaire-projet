@@ -2,6 +2,8 @@ package net.jellycopter.culinaire;
 
 import java.util.*;
 
+import net.jellycopter.lib.Outils;
+
 public abstract class Ingredients {
 
 String nom;
@@ -29,6 +31,21 @@ public static Ingredients deballer(String[] s){
 	}else{
 		i = new Basique(s[0]);
 	}
+	return i;
+}
+
+public static Ingredients creer(){
+	String nom = Outils.readString(Menu.app_title, "Nom de l'ingrédient");
+	int g = Outils.readOption(Menu.app_title, 
+			"Gout de l'ingrédient", Menu.gout);
+	Ingredients i = null;
+	
+	switch(g){
+	case 0: i = new Sale(nom);	break;
+	case 1: i = new Sucre(nom);	break;
+	default: i = new Basique(nom);
+	}
+	
 	return i;
 }
 
