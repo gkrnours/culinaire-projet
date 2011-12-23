@@ -34,8 +34,7 @@ public static Ingredients deballer(String[] s){
 	return i;
 }
 
-public static Ingredients creer(){
-	String nom = Outils.readString(Menu.app_title, "Nom de l'ingrédient");
+public static Ingredients creer(String nom){
 	int g = Outils.readOption(Menu.app_title, 
 			"Gout de l'ingrédient", Menu.gout);
 	Ingredients i = null;
@@ -47,6 +46,10 @@ public static Ingredients creer(){
 	}
 	
 	return i;
+}
+public static Ingredients creer(){
+	String nom = Outils.readString(Menu.app_title, "Nom de l'ingrédient");
+	return creer(nom);
 }
 
 public Ingredients(String nom) {
