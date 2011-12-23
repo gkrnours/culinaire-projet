@@ -3,7 +3,6 @@ package net.jellycopter.culinaire;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 
 import net.jellycopter.lib.Memory;
@@ -15,9 +14,9 @@ class LoadFailedException extends Exception{
 
 public class Menu {
 	private Set<Recettes> recettes = new HashSet<Recettes>();
-	String app_title = new String("Culinaire");
-	String[] gout = new String[]{"Salé","Sucré","Basique"};
-	String[] cuisson = new String[]{"Froid", "Four", 
+	static String app_title = new String("Culinaire");
+	static String[] gout = new String[]{"Salé","Sucré","Basique"};
+	static String[] cuisson = new String[]{"Froid", "Four", 
 									"Plaque chauffante", "Micro-ondes"};
 	
 	public static void main(String[] args){
@@ -26,60 +25,47 @@ public class Menu {
 	
 	public Menu(){
 		load();
+		Frigo f = Frigo.get();
 		boolean act = true;
 		String[] options = new String[]{
 				"Ajouter une recette",
 				"Afficher les recettes",
+				"Remplir le frigo",
 				"Arreter"};
 		do{
 			switch(Outils.readOption(app_title, "Que faire ?", options)){
-			case 0:		livreRecette();		break;
+			case 0:		livreRecette();			break;
 			case 1:		afficheRecettes();		break;
+			case 2:		f.remplir();				break;
 			default: act = false;
 			}
 		}while(act);
 		save();
 	}
 	
-	private void frigo(){
-		
-	}
 	private void afficheRecettes(){
 		for(Recettes r: Recettes.getAll()){
-//			String[] aff = new String[r.getIngredients().size()+1];
-//			aff[0] = r.getNom()+" - "+r.getTemps();
-//			int i = 0; 
-//			for(Entry<Ingredients, Integer> e: r.getIngredients().entrySet() ){
-//				aff[++i] = e.getKey()+" "+e.getValue();
-//			}
-//			Outils.affiche(app_title, aff);
 			Outils.affiche(app_title, r);
 		}
 	}
 	private void livreRecette(){
-		String t = " - Ajout d'une recette";
+		String t = app_title+" - Ajout d'une recette";
 		do{
-			String nom = Outils.readString(app_title+t, "Nom de la recette ?");
-			int temps = Outils.readInt(app_title+t, "Temps de préparation ?");
+			String nom = Outils.readString(t, "Nom de la recette ?");
+			int temps = Outils.readInt(t, "Temps de préparation ?");
 			Map<Ingredients, Integer> ingredient = 
 				new HashMap<Ingredients, Integer>();
 			do{ // ajout des ingrédients à la recette
-				String n = Outils.readString(app_title+t, 
-						"Nom d'un ingredient ?");
+				String n = Outils.readString(t, "Nom d'un ingredient ?");
 				Ingredients i = Ingredients.get(n);
 				if(i == null){ // si l'ingrédient est inconnu, création
-					int g =	Outils.readOption(app_title+t,
-							"Gout de l'ingredient", gout);
-					switch(g){
-					case 0:	i = new Sale(n);	break;
-					case 1:	i = new Sucre(n);	break;
-					case 2:	i = new Basique(n);	break; }
+					i = Ingredients.creer(n);
 				}
-				int q =	Outils.readInt(app_title+t, "Quantité ?");
+				int q =	Outils.readInt(t, "Quantité ?");
 				ingredient.put(i, q);
-			}while(Outils.readBoolean(app_title+t, "Plus d'ingredient ?"));
-			int c = Outils.readOption(app_title+t, "Mode de cuisson ?",
-										cuisson);
+			}while(Outils.readBoolean(t, "Plus d'ingredient ?"));
+			
+			int c = Outils.readOption(t, "Mode de cuisson ?", cuisson);
 			Recettes r = null;
 			switch(c){
 			case 0:	r = new Froid(nom, temps, ingredient);		break;
