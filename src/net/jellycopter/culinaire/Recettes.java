@@ -37,11 +37,11 @@ public abstract class Recettes {
 						Integer.parseInt(raw_ing[2]));
 		}
 		Recettes r;
-		if(e[3] == "plaqueChaufante"){
+		if(e[3].equals("plaqueChaufante")){
 			r = new plaqueChaufante(e[0], Integer.parseInt(e[1]), ing);
-		}else if(e[3] == "MicroOndes"){
+		}else if(e[3].equals("MicroOndes")){
 			r = new MicroOndes(e[0], Integer.parseInt(e[1]), ing);
-		}else if(e[3] == "Four"){
+		}else if(e[3].equals("Four")){
 			r = new Four(e[0], Integer.parseInt(e[1]), ing);
 		}else{
 			r = new Froid(e[0], Integer.parseInt(e[1]), ing);
@@ -69,13 +69,13 @@ public abstract class Recettes {
 		return temps;
 	}
 //TODO 	memory: primary key
-//TODO	recette: type de recette
 	public Map<Ingredients, Integer> getIngredients() {
 		return ingredients;
 	}
 
 	public String toString(){
-		String r =  this.getClass().toString().split("[.]")[3]
+		String r = this.nom+"\n"
+				+this.getClass().toString().split("[.]")[3]
 				+": "+temps+" minutes\n"
 				+"Ingredients :";
 		for(Entry<Ingredients, Integer> e: ingredients.entrySet()){
