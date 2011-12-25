@@ -2,6 +2,7 @@ package net.jellycopter.culinaire;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import net.jellycopter.lib.Outils;
 
@@ -27,7 +28,6 @@ public class Frigo {
 				System.err.println("ingredient inconnu");
 				Ingredients.creer(nom);
 				qt = Outils.readInt(t, new String[]{
-			                                                                                                                                                                              			"Cet ingrédient était absent du frigo.",
 						"En quel quantité l'ajouter au frigo ?"} );
 			} else {
 				int prev = contenu.get(i);
@@ -44,5 +44,17 @@ public class Frigo {
 				Outils.affiche(t, "Le frigo contient maintenant "+qt+" "+nom);
 			}
 		}while(Outils.readBoolean(app_title,"Continuer à remplir le frigo ?"));
+	}
+	
+	public boolean estPresent(Ingredients i, int qt){
+		int present = contenu.get(i);
+		return qt <= present;
+	}
+	public boolean estPresent(Map<Ingredients, Integer> is){
+		for(Entry<Ingredients, Integer> i: is.entrySet()){
+			int present = contenu.get(i.getKey());
+			if(i.getValue() < present){ return false; }
+		}
+		return true;
 	}
 }
