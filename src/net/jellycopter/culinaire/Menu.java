@@ -24,23 +24,27 @@ public class Menu {
 	}
 	
 	public Menu(){
-		load();
 		Frigo f = Frigo.get();
+		load();
+		f.load();
 		boolean act = true;
 		String[] options = new String[]{
 				"Ajouter une recette",
 				"Afficher les recettes",
 				"Remplir le frigo",
+				"Afficher le contenu du frigo",
 				"Arreter"};
 		do{
 			switch(Outils.readOption(app_title, "Que faire ?", options)){
 			case 0:		livreRecette();			break;
 			case 1:		afficheRecettes();		break;
-			case 2:		f.remplir();				break;
+			case 2:		f.remplir();			break;
+			case 3:		f.affiche();			break;
 			default: act = false;
 			}
 		}while(act);
 		save();
+		f.save();
 	}
 	
 	private void afficheRecettes(){
