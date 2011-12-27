@@ -56,7 +56,7 @@ public class Memory {
 		try{
 			db.open(true);
 			StringBuilder request = new StringBuilder();
-			request.append("INSERT INTO ").append(what);
+			request.append("INSERT OR REPLACE INTO ").append(what);
 			request.append(" VALUES (");
 			for(String d: data){
 				request.append("\"").append(d).append("\",");

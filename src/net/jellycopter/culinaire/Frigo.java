@@ -102,8 +102,6 @@ public class Frigo {
 						toSave, 0, ing.getKey().emballer().length);
 				toSave[toSave.length-1] = ing.getValue()+"";
 				Memory.write("frigo", toSave);
-				Outils.affiche(Menu.app_title, "frigo");
-				Outils.affiche(Menu.app_title, toSave);
 			}
 			catch(Exception e){
 				System.err.println("Erreur lors de l'écriture: "+e);
