@@ -29,11 +29,12 @@ public class Menu {
 		f.load();
 		boolean act = true;
 		String[] options = new String[]{
-				"Ajouter une recette",
-				"Afficher les recettes",
-				"Remplir le frigo",
-				"Afficher le contenu du frigo",
-				"Arreter"};
+				"img/recette_add.png",	// "Ajouter une recette",
+				"img/recette_view.png",	// "Afficher les recettes",
+				"img/frigo_add.png",	// "Remplir le frigo",
+				"img/frigo_view.png",	// "Afficher le contenu du frigo",
+				"img/exit.png",			// "Arreter",
+		};
 		do{
 			switch(Outils.readOption(app_title, "Que faire ?", options)){
 			case 0:		livreRecette();			break;
@@ -122,6 +123,7 @@ public class Menu {
 	private void build() throws MemoryException{
 		Memory.build("ingredient", new String[] {"nom", "gout"});
 		Memory.build("recette", new String[] 
-					{"nom", "temps", "ingredient", "cuisson"});
+				{"nom", "temps", "ingredient", "cuisson"});
+		
 	}
 }
