@@ -40,7 +40,7 @@ static public Ingredients[] getAll(){
 }
 
 /**
- * Créer une représentation d'un ingrédient sous la forme d'un tableau de 
+ * Crée une représentation d'un ingrédient sous la forme d'un tableau de 
  * chaine de caractère
  * @return String[]
  */

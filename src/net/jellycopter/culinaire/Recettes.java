@@ -12,6 +12,11 @@ public abstract class Recettes {
 	int temps;
 	Map<Ingredients , Integer> ingredients = new HashMap<Ingredients, Integer>();
 	
+	/**
+	 * crée une représentation d'une recette sous forme d'un tableau de chaine 
+	 * de caractère
+	 * @return String[]
+	 */
 	public String[] emballer(){
 		String[] e = new String[4];
 		e[0] = nom;
@@ -29,6 +34,13 @@ public abstract class Recettes {
 		// la classe est le 4ème champ lors du split
 		return e;
 	}
+	/**
+	 * Crée une recette a partir d'un tableau de chaine de caractère formaté 
+	 * comme le retour d'emballer. Le comportement de la fonction n'est pas 
+	 * garantie si le tableau est mal formaté.
+	 * @param e tableau de chaine de caractère
+	 * @return Recettes
+	 */
 	public static Recettes deballer(String[] e){
 		Map<Ingredients, Integer> ing = new HashMap<Ingredients, Integer>();
 		for(String s: e[2].split(";")){
@@ -48,6 +60,9 @@ public abstract class Recettes {
 		}
 		return r;
 	}
+	/**
+	 * @return un tableau contenant toutes les recettes connu
+	 */
 	public static Recettes[] getAll(){
 		return hs.values().toArray(new Recettes[hs.size()]);
 	}
