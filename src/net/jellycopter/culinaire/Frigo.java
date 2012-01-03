@@ -66,8 +66,9 @@ public class Frigo {
 		Outils.affiche(Menu.app_title, aff);
 	}
 	
-	public boolean estPresent(Ingredients i, int qt){
-		int present = contenu.get(i);
+	public boolean estPresent(Ingredients i, double qt){
+		Integer present = contenu.get(i);
+		if(present == null) return false;
 		return qt <= present;
 	}
 	public boolean estPresent(Map<Ingredients, Integer> is){

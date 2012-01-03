@@ -105,10 +105,10 @@ public class Outils{
 	 * Demande d'un nombre entier à l'utilisateur.
 	 * @param title Titre de la fenêtre posant la question
 	 * @param question Question à poser à l'utilisateur. Peut être un String, ou une objet plus complexe. 
-	 * @return Retourne un entier valide, pouvant être nul ou négatif
+	 * @return Retourne un entier, pouvant être nul ou négatif, ou null
 	 * @see JOptionPane#message
 	 */
-	public static int readInt(String title, Object question){
+	public static Integer readInt(String title, Object question){
 		return readInt(title, question, "");
 	}
 	/**

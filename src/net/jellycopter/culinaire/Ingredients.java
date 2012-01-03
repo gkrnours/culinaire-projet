@@ -4,17 +4,7 @@ import java.util.*;
 
 import net.jellycopter.lib.Outils;
 
-/**
- * @author gkr
- *
- */
-/**
- * @author gkr
- *
- */
 public abstract class Ingredients {
-
-String nom;
 
 static Map<String, Ingredients> hs = new HashMap<String, Ingredients>();
 /**
@@ -56,6 +46,8 @@ public String[] emballer(){
  * @return Ingredients
  */
 public static Ingredients deballer(String[] s){
+	if(get(s[0]) != null){ return get(s[0]); }
+	
 	Ingredients i;
 	if(s[1].equals("Sucre")){
 		i = new Sucre(s[0]);
@@ -94,13 +86,15 @@ public static Ingredients creer(){
 	return creer(nom);
 }
 
+String nom;
+
 public Ingredients(String nom) {
 
 super();
 
 this.nom = nom;
 
-hs.put(nom, this);
+ajouter(this);
 }
 
 public String getNom() {

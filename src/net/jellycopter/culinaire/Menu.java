@@ -15,15 +15,16 @@ class LoadFailedException extends Exception{
 public class Menu {
 	private Set<Recettes> recettes = new HashSet<Recettes>();
 	static String app_title = new String("Culinaire");
-	static String[] cuisson_img = new String[]{
-		"img/froid.png", "img/four.png", "img/plaque.png", "img/micro.png"};
-	static String[] cuisson_txt = new String[]{"Froid", "Four", 
+	private static String[] cuisson_img = new String[]{
+		"img/froid.png", "img/four.png",
+		"img/plaquechaufante.png", "img/microondes.png"};
+	private static String[] cuisson_txt = new String[]{"Froid", "Four", 
 									"Plaque chauffante", "Micro-ondes"};
-	static String[] cuisson = cuisson_txt;
+	static String[] cuisson = cuisson_img;
 	
-	static final String[] gout_img = new String[]{
+	private static final String[] gout_img = new String[]{
 		"img/sale.png","img/sucre.png","img/basic.png"};
-	static final String[] gout_txt = new String[]{"Salé","Sucré","Basique"};
+	private final String[] gout_txt = new String[]{"Salé","Sucré","Basique"};
 	static String[] gout = gout_img;
 	
 	public static void main(String[] args){
@@ -40,6 +41,7 @@ public class Menu {
 				"img/recette_view.png",	// "Afficher les recettes",
 				"img/frigo_add.png",	// "Remplir le frigo",
 				"img/frigo_view.png",	// "Afficher le contenu du frigo",
+				"img/miam.png",			//"manger !",
 				"img/exit.png",			// "Arreter",
 		};
 		do{
@@ -48,6 +50,7 @@ public class Menu {
 			case 1:		afficheRecettes();		break;
 			case 2:		f.remplir();			break;
 			case 3:		f.affiche();			break;
+			case 4:		new Quest();			break;
 			default: act = false;
 			}
 		}while(act);
@@ -73,7 +76,8 @@ public class Menu {
 				if(i == null){ // si l'ingrédient est inconnu, création
 					i = Ingredients.creer(n);
 				}
-				int q =	Outils.readInt(t, "Quantité ?");
+				Integer q =	Outils.readInt(t, "Quantité ?");
+				if(q==null)	return;
 				ingredient.put(i, q);
 			}while(Outils.readBoolean(t, "Plus d'ingredient ?"));
 			

@@ -5,13 +5,12 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import net.jellycopter.lib.Outils;
+
 
 public abstract class Recettes {
 	static Map<String, Recettes> hs = new HashMap<String, Recettes>();
 
-	String nom ;
-	int temps;
-	Map<Ingredients , Integer> ingredients = new HashMap<Ingredients, Integer>();
 	
 	/**
 	 * crée une représentation d'une recette sous forme d'un tableau de chaine 
@@ -68,6 +67,11 @@ public abstract class Recettes {
 		return hs.values();
 	}
 	
+/*** Instance de recette ------------------------------------------------- ***/
+	String nom ;
+	int temps;
+	Map<Ingredients , Integer> ingredients = new HashMap<Ingredients, Integer>();
+	
 	public Recettes(String nom, int temps, Map<Ingredients, Integer> ingredients) {
 		super();
 		this.nom = nom;
@@ -84,7 +88,23 @@ public abstract class Recettes {
 	public int getTemps() {
 		return temps;
 	}
-//TODO 	memory: primary key
+	/**
+	 * Retourne le gout de la recette sous la forme d'une valeur numérique
+	 * @return nombre négatif si la recette est salé, positif si sucré
+	 */
+	public int getGout() {
+		int sale = 0; int sucre = 0;
+		for(Entry<Ingredients, Integer> i: ingredients.entrySet()){
+			if("Sucre" == i.getKey().getClass().toString().split("[.]")[3]){
+				sucre += i.getValue();
+			}else
+			if("Sale" == i.getKey().getClass().toString().split("[.]")[3]){
+				sale += i.getValue();
+			}
+		}
+		return sucre - sale;
+	}
+	
 	public Map<Ingredients, Integer> getIngredients() {
 		return ingredients;
 	}
@@ -100,6 +120,10 @@ public abstract class Recettes {
 		return r;
 	}
 
-
+	public void affiche(){
+		String icon = "img/"+this.getClass().toString().split("[.]")[3]
+				.toLowerCase()+".png";
+		Outils.affiche(Menu.app_title, this, icon);
+	}
 	
 }
