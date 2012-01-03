@@ -28,7 +28,7 @@ public class Frigo {
 			int qt;
 			if(i == null){
 				System.err.println("ingredient inconnu");
-				Ingredients.creer(nom);
+				i = Ingredients.creer(nom);
 				qt = Outils.readInt(t, new String[]{
 						"En quel quantité l'ajouter au frigo ?"} );
 			} else {
@@ -40,6 +40,7 @@ public class Frigo {
 						"Il y a actuellement "+prev+" "+nom+"au frigo.",
 						"Quel est la nouvelle valeur ?"} );
 			}
+			
 			if(qt < 0){
 				contenu.remove(nom);
 				Outils.affiche(t, "La quantité étant négative, "+nom
