@@ -1,5 +1,6 @@
 package net.jellycopter.culinaire;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -61,10 +62,10 @@ public abstract class Recettes {
 		return r;
 	}
 	/**
-	 * @return un tableau contenant toutes les recettes connu
+	 * @return la collection de toutes recettes connues
 	 */
-	public static Recettes[] getAll(){
-		return hs.values().toArray(new Recettes[hs.size()]);
+	public static Collection<Recettes> getAll(){
+		return hs.values();
 	}
 	
 	public Recettes(String nom, int temps, Map<Ingredients, Integer> ingredients) {

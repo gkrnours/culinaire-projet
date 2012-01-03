@@ -33,10 +33,10 @@ static public Ingredients get(String nom){
 	return hs.get(nom);
 }
 /**
- * @return un tableau contenant tout les ingrédients connu
+ * @return la liste de tout les ingrédients connu
  */
-static public Ingredients[] getAll(){
-	return hs.values().toArray(new Ingredients[hs.size()]);
+static public Collection<Ingredients> getAll(){
+	return hs.values();
 }
 
 /**
