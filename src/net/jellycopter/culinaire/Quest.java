@@ -74,5 +74,6 @@ public class Quest {
 		
 		int affiche = Outils.readInt(Menu.app_title, choix);
 		recettes.get(affiche-1).affiche();
+		f.vider(recettes.get(affiche-1));
 	}
 } 

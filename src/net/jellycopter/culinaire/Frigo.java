@@ -51,6 +51,17 @@ public class Frigo {
 			}
 		}while(Outils.readBoolean(app_title,"Continuer à remplir le frigo ?"));
 	}
+	public void vider(Recettes r){
+		for(Entry<Ingredients, Integer> i: r.getIngredients().entrySet()){
+			Integer prev = contenu.get(i.getKey());
+			if(prev == null){ continue; }
+			if(prev-i.getValue() <= 0){
+				contenu.remove(i.getKey());
+			}else{
+				contenu.put(i.getKey(), prev-i.getValue());
+			}
+		}
+	}
 	
 	public void affiche(){
 		if(contenu.isEmpty()){
