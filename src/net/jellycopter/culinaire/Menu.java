@@ -15,9 +15,16 @@ class LoadFailedException extends Exception{
 public class Menu {
 	private Set<Recettes> recettes = new HashSet<Recettes>();
 	static String app_title = new String("Culinaire");
-	static String[] gout = new String[]{"Salé","Sucré","Basique"};
-	static String[] cuisson = new String[]{"Froid", "Four", 
+	static String[] cuisson_img = new String[]{
+		"img/froid.png", "img/four.png", "img/plaque.png", "img/micro.png"};
+	static String[] cuisson_txt = new String[]{"Froid", "Four", 
 									"Plaque chauffante", "Micro-ondes"};
+	static String[] cuisson = cuisson_txt;
+	
+	static final String[] gout_img = new String[]{
+		"img/sale.png","img/sucre.png","img/basic.png"};
+	static final String[] gout_txt = new String[]{"Salé","Sucré","Basique"};
+	static String[] gout = gout_img;
 	
 	public static void main(String[] args){
 		new Menu();
