@@ -116,10 +116,10 @@ public class Outils{
 	 * @param title Titre de la fenêtre posant la question
 	 * @param question Question à poser à l'utilisateur.
 	 * @param image chemin de l'image à afficher à coté de la question
-	 * @return Retourne un entier valide, pouvant être nul ou négatif
+	 * @return Retourne un entier, pouvant être nul ou négatif, ou null
 	 * @see JOptionPane#message
 	 */
-	public static int readInt(String title , Object question, String image) {
+	public static Integer readInt(String title , Object question, String image) {
 		int result ;
 		Object request;
 		request = JOptionPane.showInputDialog(null, question, title,
@@ -128,6 +128,8 @@ public class Outils{
 			result = Integer.parseInt(request.toString());
 		}catch (java.lang.NumberFormatException e){
 			return readInt(title, question+"\n entrez un entier", image);
+		}catch (java.lang.NullPointerException e){
+			return null;
 		}
 		return result;
 	}
